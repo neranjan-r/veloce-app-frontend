@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import ActiveRideBanner from "@/components/ActiveRideBanner";
 
 export default async function DashboardPage() {
   const { userId } = await auth();
@@ -11,8 +12,8 @@ export default async function DashboardPage() {
     redirect("/sign-in");
   }
 
-  // Use user's unsafeMetadata since we set it on the client
-  const role = user?.unsafeMetadata?.role;
+  // Use user's publicMetadata strictly
+  const role = (user?.publicMetadata?.role as string | undefined)?.toUpperCase();
   if (!role) {
     redirect("/onboarding");
   }
@@ -23,6 +24,8 @@ export default async function DashboardPage() {
 
   return (
     <div className="mx-auto max-w-5xl animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <ActiveRideBanner />
+
       <div className="mb-12 border-b border-white/10 pb-6">
         <h1 className="text-4xl font-light tracking-wide text-white uppercase">Welcome, <span className="premium-text-gradient font-medium">{user?.firstName || "Client"}</span></h1>
         <p className="text-gray-400 mt-2 font-light tracking-widest text-sm uppercase">Your exceptional journey awaits</p>

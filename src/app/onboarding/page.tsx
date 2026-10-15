@@ -12,13 +12,24 @@ export default function OnboardingPage() {
   const selectRole = async (role: "RIDER" | "DRIVER") => {
     setLoading(true);
     try {
-      await user?.update({
-        unsafeMetadata: { role },
+      const res = await fetch("/api/onboarding", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ role }),
       });
+
+      if (!res.ok) {
+        throw new Error("Failed to set role");
+      }
+
+      // Reload user session to synchronize updated publicMetadata
+      await user?.reload();
+
       if (role === "RIDER") router.push("/dashboard");
       if (role === "DRIVER") router.push("/driver");
     } catch (error) {
       console.error("Failed to update role", error);
+      alert("Failed to set account role. Please try again.");
     } finally {
       setLoading(false);
     }

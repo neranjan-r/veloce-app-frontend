@@ -37,3 +37,16 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Leaflet Marker Reset: ensure custom pins have no default white box or border */
+.leaflet-div-icon {
+  background: transparent !important;
+  border: none !important;
+}
+
+.veloce-pickup-marker,
+.veloce-dropoff-marker,
+.veloce-driver-marker {
+  background: transparent !important;
+  border: none !important;
+}
