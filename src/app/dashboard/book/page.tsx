@@ -282,7 +282,7 @@ export default function BookRidePage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Map Component */}
-        <div className="lg:col-span-2 bg-[#111] rounded-2xl relative overflow-hidden flex items-center justify-center border border-white/10 h-[520px] lg:h-auto min-h-[460px]">
+        <div className="lg:col-span-2 bg-[#111] rounded-2xl relative overflow-hidden border border-white/10 h-[520px] lg:h-full min-h-[500px]">
           <Map 
             pickup={pickup} 
             dropoff={dropoff} 

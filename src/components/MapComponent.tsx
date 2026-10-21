@@ -49,6 +49,9 @@ function MapEffects({
   useEffect(() => {
     // Invalidate map size so Leaflet recalculates dimensions properly inside cards
     map.invalidateSize();
+    const timer = setTimeout(() => {
+      map.invalidateSize();
+    }, 250);
 
     if (pickup && dropoff) {
       const bounds = L.latLngBounds(
@@ -71,6 +74,7 @@ function MapEffects({
     } else if (driverLocation) {
       map.setView([driverLocation.lat, driverLocation.lng], 14);
     }
+    return () => clearTimeout(timer);
   }, [map, pickup, dropoff, driverLocation, routeGeometry]);
 
   return null;
@@ -184,12 +188,12 @@ export default function Map({
     : [28.6315, 77.2167];
 
   return (
-    <div style={{ height: "100%", width: "100%", position: "relative", zIndex: 1, backgroundColor: "#0f0f11" }}>
+    <div style={{ height: "100%", width: "100%", minHeight: "350px", position: "relative", zIndex: 1, backgroundColor: "#0f0f11" }}>
       <MapContainer 
         center={defaultCenter}
         zoom={13} 
         scrollWheelZoom={true}
-        style={{ height: "100%", width: "100%", backgroundColor: "#0f0f11" }}
+        style={{ height: "100%", width: "100%", minHeight: "350px", backgroundColor: "#0f0f11" }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'

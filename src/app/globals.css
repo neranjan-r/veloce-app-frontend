@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
 
 :root {
   --background: #050505;
@@ -49,4 +50,17 @@ body {
 .veloce-driver-marker {
   background: transparent !important;
   border: none !important;
+}
+
+/* Ensure Leaflet container always fills parent and is visible */
+.leaflet-container {
+  height: 100% !important;
+  width: 100% !important;
+  min-height: 100% !important;
+  background-color: #0f0f11 !important;
+  z-index: 1;
+}
+
+.leaflet-tile-container img {
+  max-width: none !important;
 }
