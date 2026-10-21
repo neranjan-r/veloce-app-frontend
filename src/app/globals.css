@@ -64,3 +64,8 @@ body {
 .leaflet-tile-container img {
   max-width: none !important;
 }
+
+/* Premium Veloce Dark Mode Filter for OpenStreetMap Tiles (Removes watermark, sleek luxury dark palette) */
+.veloce-dark-tiles .leaflet-tile {
+  filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7) !important;
+}
